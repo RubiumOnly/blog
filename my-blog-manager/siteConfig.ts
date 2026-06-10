@@ -15,7 +15,7 @@ export const siteConfig = {
   navAfter: "Blog",
 
   // 2. 头像设置 (支持网络链接，或将图片放入 public 文件夹后使用 "/me.jpg")
-  avatarUrl: "/siamese-cat.png",
+  avatarUrl: "https://cdn.jsdelivr.net/gh/RubiumOnly/blog-images@main/images/2026/06/10/b459f60a-045c57ebb6946fdf7e57a53d5768117dd8543862.gif",
 
   // 3. 网站背景设置 (二选一)
   // 如果想用纯图片背景，请在下面 bgImage 写路径，并将 useGradient 设为 false
@@ -29,7 +29,7 @@ export const siteConfig = {
 
   // 5. 首页照片墙预览图
   photoWallImage: "/siamese-cat.png",
-  cloudMusicIds: [],
+  cloudMusicIds: ["3375694932", "1807537867"],
   social: {
     github: "https://github.com/RubiumOnly",
     gitee: "",
@@ -46,15 +46,15 @@ export const siteConfig = {
 
   // 👇 【新增】：图床核心配置 (PicBed Configuration)
   picBedName: "图床",
-  picBedUrl: "", // 默认的 Lsky Pro API 地址
-  picBedToken: "", // 留空，等你能在后台填入并覆写
+  picBedUrl: "https://github.com/RubiumOnly/blog-images", // 默认的 Lsky Pro API 地址
+  picBedToken: "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", // 留空，等你能在后台填入并覆写
 
   // 👇 【新增】：全局背景弹幕配置
   danmakuList: ["正在记录灵感", "今天也要好好写代码", "保持好奇", "慢慢打磨"],
   gitalkConfig: {
-    clientID: "",
-    clientSecret: "",
-    repo: "",
+    clientID: "Ov23li0s0kTkUQHMYxDd",
+    clientSecret: "eedae63e0d681d26cedaebfa2bec9e0c841563fe",
+    repo: "blog-comments",
     owner: "RubiumOnly",
     admin: ["RubiumOnly"],
   },

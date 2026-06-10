@@ -75,10 +75,10 @@ export default function GallerySection({ formData, handleUpdate, pushToQueue }: 
 
         {/* 👈 新增：彻底解耦的 API 地址输入框 */}
         <div>
-          <label className="text-[10px] font-black text-slate-400 uppercase ml-1">API 接口地址 (URL)</label>
+          <label className="text-[10px] font-black text-slate-400 uppercase ml-1">GitHub 仓库地址 (URL)</label>
           <input
             type="text"
-            placeholder="例如: https://pic.dusays.com"
+            placeholder="例如: https://github.com/RubiumOnly/blog-images"
             value={formData.picBedUrl || ''}
             onChange={e => handleUpdate('picBedUrl', e.target.value)}
             className="w-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-sm outline-none mt-1 text-slate-700 dark:text-slate-200"
@@ -86,10 +86,10 @@ export default function GallerySection({ formData, handleUpdate, pushToQueue }: 
         </div>
 
         <div>
-          <label className="text-[10px] font-black text-slate-400 uppercase ml-1">API TOKEN (鉴权密钥)</label>
+          <label className="text-[10px] font-black text-slate-400 uppercase ml-1">GitHub API TOKEN (鉴权密钥)</label>
           <input
             type="password"
-            placeholder="输入 Bearer Token 或纯 Token"
+            placeholder="输入你的 GitHub PAT (ghp_...)"
             value={formData.picBedToken || ''}
             onChange={e => handleUpdate('picBedToken', e.target.value)}
             className="w-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-sm outline-none mt-1 text-slate-700 dark:text-slate-200"

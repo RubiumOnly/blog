@@ -136,8 +136,22 @@ function SettingsContent() {
     setQueryLoading(true);
     setQueryResult(null);
 
-    const info = await fetchMusicDetail(formData.newMusicId);
+    // 智能提取 ID：支持网易云分享链接、纯数字 ID 等形式
+    let rawInput = formData.newMusicId.trim();
+    let extractedId = rawInput;
+    const idMatch = rawInput.match(/id=(\d+)/);
+    if (idMatch) {
+      extractedId = idMatch[1];
+    } else {
+      const numMatch = rawInput.match(/^\d+$/);
+      if (numMatch) {
+        extractedId = numMatch[0];
+      }
+    }
+
+    const info = await fetchMusicDetail(extractedId);
     if (info && !info.error) {
+      handleUpdate('newMusicId', extractedId);
       setQueryResult(info);
       showToast("获取成功！", "success");
     } else {
