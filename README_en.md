@@ -215,7 +215,7 @@ Then return to Vercel, enter your project dashboard, and click **Settings** (or 
 
 ![进入设置](picture/Pasted%20image%2020260427123838.png)
 
-In the Domains tab, enter the domain you purchased (for example, mine is `xinghuisama.top`), and click **Add** to save:
+In the Domains tab, enter the domain you purchased (for example, `example.com`), and click **Add** to save:
 
 After adding it, Vercel will provide the configuration parameters for the `A` record and `CNAME` record. Please add these parameters completely to your Alibaba Cloud DNS resolution settings:
 
@@ -227,7 +227,7 @@ After configuration is complete, wait a few minutes (DNS propagation takes time)
 
 ![Refresh](picture/Pasted%20image%2020260427124625.png)
 
-Once the status shows as normal, you can access the blog via your custom domain name! (For example: `www.xinghuisama.top`).
+Once the status shows as normal, you can access the blog via your custom domain name! (For example: `www.example.com`).
 
 ---
 
@@ -336,7 +336,7 @@ In the console's comment settings, enter your GitHub username and the name of th
 | Field Name | Suggestion |
 | --- | --- |
 | **Application name** | Custom name, e.g., `My-Blog-Comments` |
-| **Homepage URL** | The **complete address of your blog's homepage** (e.g., `[https://www.xinghuisama.top](https://www.xinghuisama.top)`) |
+| **Homepage URL** | The **complete address of your blog's homepage** (e.g., `https://www.example.com`) |
 | **Application description** | Optional |
 | **Authorization callback URL** | **Core parameter**: Must be your blog domain. If debugging locally frequently, you can enter `http://localhost:3000` |
 

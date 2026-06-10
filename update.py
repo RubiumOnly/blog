@@ -21,7 +21,7 @@ def run_cmd(cmd, cwd=None):
 
 
 def main():
-    print_step("XingHuiSama升级程序 (Python 稳定版)")
+    print_step("RubiumOnly Blog 升级程序 (Python 稳定版)")
 
     # 1. 环境自检
     if not shutil.which("git"):
@@ -35,7 +35,7 @@ def main():
     if not os.path.exists(".git"):
         print("🪄 初始化 Git 环境...")
         run_cmd("git init")
-        run_cmd("git remote add origin https://github.com/heiehiehi/XinghuisamaBlogs.git")
+        run_cmd("git remote add origin https://github.com/RubiumOnly/blog.git")
 
     # 3. 拉取更新
     print_step("[1/4] 连接云端获取最新代码...")

@@ -7,38 +7,47 @@ import MomentList from './MomentList';
 import { siteConfig } from '../../siteConfig';
 
 export const metadata = {
-  title: "说说 | " + siteConfig.authorName + " の 博客",
+  title: "说说 | " + siteConfig.title,
   description: "生活动态与瞬间记录",
 };
+
+function buildMomentItem(fileName: string, data: any, content: string) {
+  return {
+    id: fileName.replace(/\.md$/, ''),
+    date: data.date || '1970-01-01',
+    location: data.location || '',
+    images: data.images || [],
+    content: content.trim()
+  };
+}
+
+function getLegacyMomentItems() {
+  const dirPath = path.join(process.cwd(), 'posts', 'moments');
+  if (!fs.existsSync(dirPath)) return [];
+
+  return fs.readdirSync(dirPath).filter(f => f.endsWith('.md')).map(fileName => {
+    const fullPath = path.join(process.cwd(), 'posts', 'moments', fileName);
+    const { data, content } = matter(fs.readFileSync(fullPath, 'utf8'));
+    return buildMomentItem(fileName, data, content);
+  });
+}
+
+function getMomentItems() {
+  const dirPath = path.join(process.cwd(), 'moments');
+  if (!fs.existsSync(dirPath)) return [];
+
+  return fs.readdirSync(dirPath).filter(f => f.endsWith('.md')).map(fileName => {
+    const fullPath = path.join(process.cwd(), 'moments', fileName);
+    const { data, content } = matter(fs.readFileSync(fullPath, 'utf8'));
+    return buildMomentItem(fileName, data, content);
+  });
+}
 
 export default function MomentsPage() {
   let allMoments: any[] = [];
 
   try {
-    // 🌟 终极防漏绝招：同时扫描两个可能的文件夹，把所有的说说都抓出来！
-    const possibleDirs = [
-      path.join(process.cwd(), 'posts', 'moments'),
-      path.join(process.cwd(), 'moments')
-    ];
-
-    possibleDirs.forEach(dir => {
-      if (fs.existsSync(dir)) {
-        const fileNames = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
-        fileNames.forEach(fileName => {
-          const fullPath = path.join(dir, fileName);
-          const { data, content } = matter(fs.readFileSync(fullPath, 'utf8'));
-
-          allMoments.push({
-            id: fileName.replace(/\.md$/, ''),
-            date: data.date || '1970-01-01',
-            location: data.location || '',
-            images: data.images || [],
-            content: content.trim()
-          });
-        });
-      }
-    });
-
+    allMoments = [...getLegacyMomentItems(), ...getMomentItems()];
     // 去重，防止你在两个文件夹放了同名文件
     allMoments = Array.from(new Map(allMoments.map(item => [item.id, item])).values());
 

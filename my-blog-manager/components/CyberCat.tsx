@@ -25,26 +25,26 @@ export default function CyberCat() {
   const handlePetCat = () => {
     if (isPetted) return;
     setIsPetted(true);
-    speak("呼噜噜... 摸得本喵很舒服喵~", 2000);
+    speak("收到互动，今天也要保持灵感在线。", 2000);
     setTimeout(() => {
       setIsPetted(false);
     }, 2000);
   };
 
-  // --- 🐟 交互事件：喂小鱼干 ---
+  // --- 交互事件：灵感补给 ---
   const handleFeed = async (e: React.MouseEvent) => {
     e.stopPropagation(); // 阻止触发摸猫或拖拽
     if (isThinking) return;
 
     setShowInput(false); // 喂食时关掉输入框
     setIsThinking(true);
-    speak("嗷呜！真好吃喵！本喵吃饱了要说两句...", 6000);
+    speak("收到灵感补给，正在整理一句回应...", 6000);
 
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: "我刚刚喂了你一条美味的小鱼干！你有什么表示？" }),
+        body: JSON.stringify({ message: "我刚刚给你发送了一份灵感补给，请给我一句回应。" }),
       });
 
       if (!res.ok) throw new Error('API Error');
@@ -52,7 +52,7 @@ export default function CyberCat() {
       const data = await res.json();
       speak(data.reply, 8000);
     } catch (error) {
-      speak("吧唧吧唧... 鱼干好吃，但本喵卡壳了喵...", 4000);
+      speak("灵感已收到，但回复通道暂时卡住了。", 4000);
     } finally {
       setIsThinking(false);
     }
@@ -67,7 +67,7 @@ export default function CyberCat() {
     setInputValue('');
     setShowInput(false);
     setIsThinking(true);
-    speak("让本喵想想喵...", 10000);
+    speak("让我整理一下...", 10000);
 
     try {
       const res = await fetch('/api/chat', {
@@ -81,7 +81,7 @@ export default function CyberCat() {
       const data = await res.json();
       speak(data.reply, 8000);
     } catch (error) {
-      speak("铲屎官的网线被老鼠咬断了吧？喵！", 4000);
+      speak("网络通道暂时不可用，稍后再试。", 4000);
     } finally {
       setIsThinking(false);
     }
@@ -90,11 +90,11 @@ export default function CyberCat() {
   // --- ⏳ 随机挂机语录 ---
   useEffect(() => {
     const randomBarks = [
-      "喵呜~ 今天天气真不错喵~",
-      "好困哦，想睡觉喵...",
-      "铲屎官，快去敲代码！",
-      "我的小鱼干藏哪里去了？",
-      "怎么没人理本喵...",
+      "今天也适合记录一点新东西。",
+      "灵感路过，记得把它留下。",
+      "先写下来，之后再慢慢打磨。",
+      "保持好奇，保持输出。",
+      "有什么想法都可以聊聊。",
     ];
     const randomTalkInterval = setInterval(() => {
       if (!speech && !showInput && !isThinking && Math.random() > 0.8) {
@@ -159,9 +159,9 @@ export default function CyberCat() {
               onClick={handleFeed}
               disabled={isThinking}
               className={`bg-white/90 dark:bg-slate-700/90 p-2.5 rounded-full shadow-md hover:scale-110 active:scale-95 transition-transform border border-gray-100 dark:border-slate-600 flex items-center justify-center backdrop-blur-sm ${isThinking ? 'opacity-50 cursor-not-allowed' : ''}`}
-              title="喂小鱼干"
+              title="灵感补给"
             >
-              <span className="text-xl leading-none">🐟</span>
+              <span className="text-xl leading-none">✦</span>
             </button>
         </div>
 
@@ -219,7 +219,7 @@ export default function CyberCat() {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="跟煤球说点啥喵..."
+              placeholder="和 AI 助手聊点什么..."
               className="bg-transparent border-none outline-none text-sm px-3 py-1 w-full dark:text-white placeholder-gray-400"
               disabled={isThinking}
               autoFocus

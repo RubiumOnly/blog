@@ -49,7 +49,7 @@ export default function AICatSection({ formData, handleUpdate, pushToQueue }: an
       <div className="flex justify-between items-center mb-8 pb-6 border-b border-white/40 dark:border-slate-700/50">
         <div>
           <h2 className="text-2xl font-black text-slate-800 dark:text-white flex items-center gap-3 tracking-tight">
-            <Bot className="text-indigo-500" size={28} /> AI 煤球性格调度中心
+            <Bot className="text-indigo-500" size={28} /> AI 助手性格调度中心
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2 flex items-center gap-1.5">
             <Sparkles size={14} className="text-indigo-400" /> 实时重塑你的专属 AI 助理灵魂
@@ -129,7 +129,7 @@ export default function AICatSection({ formData, handleUpdate, pushToQueue }: an
               onChange={(e) => updateConfig('temperature', Number(e.target.value))}
               className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500"
             />
-            <p className="text-[11px] text-slate-400 mt-2">数值越大，猫咪说话越随机、越具创意；数值越小越严谨。</p>
+            <p className="text-[11px] text-slate-400 mt-2">数值越大，助手回复越随机、越具创意；数值越小越严谨。</p>
           </div>
         </div>
 

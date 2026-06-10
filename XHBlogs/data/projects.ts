@@ -11,14 +11,15 @@ export type Project = {
 
 export const projectsData: Project[] = [
   {
-    "id": "proj_1775049332705",
-    "name": "Computational Chemistry Tool",
-    "githubUrl": "https://github.com/heiehiehi/Computational_Chemistry_Tool",
-    "description": "该工具本作者使用在Win下的WSL2平台，系统为Ubuntu22，个人使用请依据自己数据进行修改（这些工具只是整合了一些流程）",
+    "id": "rubiumonly-blog",
+    "name": "RubiumOnly Blog",
+    "githubUrl": "https://github.com/RubiumOnly/blog",
+    "description": "基于 Next.js 的个人博客与本地管理后台，作为后续二次开发的起点。",
     "icon": "🚀",
     "tags": [
-      "Gromacs",
-      "RMSF"
+      "Next.js",
+      "Blog",
+      "CMS"
     ]
   },
 ];

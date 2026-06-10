@@ -4,20 +4,20 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 
 // ==========================================
-// 🌟 黍姐姐的专属语音库
+// 🌟 创作伙伴的专属语音库
 // ==========================================
-const SHU_QUOTES = [
-  "好好吃饭，好好休息。剩下的，交给我。",
-  "这片大地的丰收，可不能只靠祈求。",
-  "你看起来好像又瘦了？快过来，我做了点好吃的。",
-  "不要挑食，每一粒粮食都来之不易哦。",
-  "天有不测风云，所以才要提前备好粮草。",
-  "春天播种，秋天收获，万物皆有其时。",
-  "慢点走，别急。地里的庄稼，也要一点点长呢。"
+const MUSE_QUOTES = [
+  "先把想法写下来，细节可以之后慢慢打磨。",
+  "今天也适合整理一段新的记录。",
+  "别急着追求完整，持续更新本身就很有力量。",
+  "灵感来了就留个痕迹，未来的你会感谢现在的你。",
+  "休息也是创作节奏的一部分。",
+  "把复杂的问题拆小一点，就能继续往前走。",
+  "慢点走也没关系，长期主义最耐看。"
 ];
 
 // ==========================================
-// 🌟 干员休息处主组件 (全新 PRTS 通讯气泡版)
+// 🌟 创作伙伴休息处主组件
 // ==========================================
 export default function OperatorRecreation() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ export default function OperatorRecreation() {
 
   useEffect(() => {
     const triggerRandomTalk = () => {
-      const randomQuote = SHU_QUOTES[Math.floor(Math.random() * SHU_QUOTES.length)];
+      const randomQuote = MUSE_QUOTES[Math.floor(Math.random() * MUSE_QUOTES.length)];
       setCurrentQuote(randomQuote);
       setShowBubble(true);
       setTimeout(() => setShowBubble(false), 4500); // 停留时间
@@ -123,10 +123,10 @@ export default function OperatorRecreation() {
                   {/* 右下角战术角标 */}
                   <div className="absolute bottom-0 right-0 w-3 h-3 border-b-[2px] border-r-[2px] border-zinc-500/50" />
 
-                  {/* 干员通讯铭牌 */}
+                  {/* 创作伙伴通讯铭牌 */}
                   <div className="flex items-center gap-2 mb-1.5 opacity-90">
                     <span className="text-[10px] font-mono font-bold text-[#e0af68] bg-[#e0af68]/15 px-1.5 py-0.5 border border-[#e0af68]/30">
-                      SHU
+                      MUSE
                     </span>
                     <span className="text-[9px] font-mono text-zinc-400 tracking-widest">
                       COMMUNICATION
@@ -160,8 +160,8 @@ export default function OperatorRecreation() {
           >
             {/* 主体 GIF */}
             <img
-              src="/spine/shu/Shu.gif"
-              alt="Shu Walking"
+              src="/siamese-cat.png"
+              alt="Creative Partner"
               style={{ filter: "drop-shadow(0 0 1px black) drop-shadow(0 0 1px black) drop-shadow(0 0 1px black)" }}
               className="relative z-10 w-full h-full object-contain pointer-events-none"
             />

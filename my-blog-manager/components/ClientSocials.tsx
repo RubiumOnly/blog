@@ -17,6 +17,8 @@ function SocialBtn({ type, url, onClick }: { type: string, url?: string, onClick
     }
   };
 
+  if (!url && !onClick) return null;
+
   const content = (
     <div
       onClick={onClick}
@@ -31,6 +33,7 @@ function SocialBtn({ type, url, onClick }: { type: string, url?: string, onClick
 
 export default function ClientSocials() {
   const copyToClipboard = (text: string, label: string) => {
+    if (!text) return;
     navigator.clipboard.writeText(text);
     alert(`✨ ${label}已复制到剪贴板: ${text}`);
   };
@@ -40,9 +43,9 @@ export default function ClientSocials() {
       <SocialBtn type="github" url={siteConfig.social?.github} />
       <SocialBtn type="gitee" url={siteConfig.social?.gitee} />
       <SocialBtn type="google" url={siteConfig.social?.google} />
-      <SocialBtn type="email" onClick={() => copyToClipboard(siteConfig.social?.email || '', '邮箱')} />
-      <SocialBtn type="qq" onClick={() => copyToClipboard(siteConfig.social?.qq || '', 'QQ号')} />
-      <SocialBtn type="wechat" onClick={() => copyToClipboard(siteConfig.social?.wechat || '', '微信号')} />
+      {siteConfig.social?.email && <SocialBtn type="email" onClick={() => copyToClipboard(siteConfig.social.email, '邮箱')} />}
+      {siteConfig.social?.qq && <SocialBtn type="qq" onClick={() => copyToClipboard(siteConfig.social.qq, 'QQ号')} />}
+      {siteConfig.social?.wechat && <SocialBtn type="wechat" onClick={() => copyToClipboard(siteConfig.social.wechat, '微信号')} />}
     </div>
   );
 }

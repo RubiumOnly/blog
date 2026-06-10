@@ -9,6 +9,7 @@ export default function ProfileCard({ postCount, chatterCount, photoCount }: { p
   const { showToast } = useToast(); // 👈 激活魔法
 
   const copyToClipboard = (text: string, label: string) => {
+    if (!text) return;
     navigator.clipboard.writeText(text);
     // 👈 彻底消灭原生 alert，换成我们的高颜值 Toast！
     showToast(`✨ ${label}已复制到剪贴板: ${text}`, 'success');
@@ -46,9 +47,9 @@ export default function ProfileCard({ postCount, chatterCount, photoCount }: { p
           <SocialBtn type="github" url={siteConfig.social?.github} />
           <SocialBtn type="gitee" url={siteConfig.social?.gitee} />
           <SocialBtn type="google" url={siteConfig.social?.google} />
-          <SocialBtn type="email" onClick={() => copyToClipboard(siteConfig.social?.email || '', '邮箱')} />
-          <SocialBtn type="qq" onClick={() => copyToClipboard(siteConfig.social?.qq || '', 'QQ号')} />
-          <SocialBtn type="wechat" onClick={() => copyToClipboard(siteConfig.social?.wechat || '', '微信号')} />
+          {siteConfig.social?.email && <SocialBtn type="email" onClick={() => copyToClipboard(siteConfig.social.email, '邮箱')} />}
+          {siteConfig.social?.qq && <SocialBtn type="qq" onClick={() => copyToClipboard(siteConfig.social.qq, 'QQ号')} />}
+          {siteConfig.social?.wechat && <SocialBtn type="wechat" onClick={() => copyToClipboard(siteConfig.social.wechat, '微信号')} />}
         </div>
       </div>
     </div>
@@ -77,6 +78,8 @@ function SocialBtn({ type, url, onClick }: { type: string, url?: string, onClick
       default: return null;
     }
   };
+
+  if (!url && !onClick) return null;
 
   const content = (
     <div

@@ -11,9 +11,16 @@ import { siteConfig } from '../siteConfig';
 export default function LabComments({ pageId }: { pageId?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const gitalkConfig = siteConfig.gitalkConfig;
+  const isGitalkReady = Boolean(
+    gitalkConfig?.clientID &&
+    gitalkConfig?.clientSecret &&
+    gitalkConfig?.repo &&
+    gitalkConfig?.owner
+  );
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !isGitalkReady) return;
 
     // 清空之前的评论区，防止切换月份时叠加
     containerRef.current.innerHTML = '';
@@ -22,11 +29,11 @@ export default function LabComments({ pageId }: { pageId?: string }) {
     const finalId = (pageId || pathname.replace(/\/$/, '') || '/').substring(0, 49);
 
     const gitalk = new Gitalk({
-      clientID: siteConfig.gitalkConfig.clientID,
-      clientSecret: siteConfig.gitalkConfig.clientSecret,
-      repo: siteConfig.gitalkConfig.repo,
-      owner: siteConfig.gitalkConfig.owner,
-      admin: siteConfig.gitalkConfig.admin,
+      clientID: gitalkConfig.clientID,
+      clientSecret: gitalkConfig.clientSecret,
+      repo: gitalkConfig.repo,
+      owner: gitalkConfig.owner,
+      admin: gitalkConfig.admin,
       proxy: '/api/github',
       id: finalId, // 这里的 ID 决定了留言板对应 GitHub 的哪个 Issue
       distractionFreeMode: false,
@@ -41,7 +48,9 @@ export default function LabComments({ pageId }: { pageId?: string }) {
       window.history.replaceState({}, document.title, url.toString());
     }
 
-  }, [pathname, pageId]);
+  }, [pathname, pageId, isGitalkReady, gitalkConfig]);
+
+  if (!isGitalkReady) return null;
 
   return (
     <div className="w-full mt-16 relative">

@@ -21,7 +21,7 @@ function seededRandom(seed: number) {
 }
 
 // ==========================================
-// 🌟 0. 终末地/罗德岛 干员信物徽章组件 (OperatorToken)
+// 🌟 0. 创作档案徽章组件 (OperatorToken)
 // ==========================================
 const OperatorToken = ({ badge, locked = false }: any) => {
   const tierStyles: Record<number, string> = {
@@ -307,7 +307,7 @@ const HologramShip = ({ activeCategory, currentRecords, router }: any) => {
 
           <DijiangParticleModel />
 
-          <TacticalPoint position={[-1.0, -0.5, 1.5]} color="#0ea5e9" categoryName="PRTS_DB"
+          <TacticalPoint position={[-1.0, -0.5, 1.5]} color="#0ea5e9" categoryName="ARCHIVE"
                          isActive={activeCategory === 'post'} records={currentRecords.filter((r:any) => r.type === 'post')} isImageStyle={true} router={router} />
           <TacticalPoint position={[-1.5, -2, 1.5]} color="#eab308" categoryName="LOGS"
                          isActive={activeCategory === 'chatter'} records={currentRecords.filter((r:any) => r.type === 'chatter')} isImageStyle={true} router={router} />
@@ -402,67 +402,67 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
     const ownedIds = new Set();
 
     const levelConfig = [
-      { num: 1, tier: 1, title: '预备干员' }, { num: 2, tier: 2, title: '正式干员' },
-      { num: 3, tier: 3, title: '精英干员' }, { num: 5, tier: 4, title: '资深干员' },
-      { num: 10, tier: 5, title: '高级资深' }, { num: 15, tier: 6, title: '战术指挥' },
-      { num: 20, tier: 7, title: '协议主管' }, { num: 30, tier: 8, title: '终末枢纽' },
-      { num: 40, tier: 9, title: '塔卫二领航' }, { num: 50, tier: 10, title: '罗德岛之眼' }
+      { num: 1, tier: 1, title: '灵感新手' }, { num: 2, tier: 2, title: '正式记录者' },
+      { num: 3, tier: 3, title: '稳定创作者' }, { num: 5, tier: 4, title: '长期主义者' },
+      { num: 10, tier: 5, title: '内容策展人' }, { num: 15, tier: 6, title: '知识整理者' },
+      { num: 20, tier: 7, title: '系统构建者' }, { num: 30, tier: 8, title: '创作枢纽' },
+      { num: 40, tier: 9, title: '灵感领航员' }, { num: 50, tier: 10, title: '档案守望者' }
     ];
     levelConfig.forEach(conf => {
       const id = `lvl-${conf.num}`;
-      allCatalogBadges.push({ id, title: conf.title, typeLabel: `PRTS授权 Lv.${conf.num}`, condition: `权限等级达到 Lv.${conf.num}`, icon: Shield, colorTier: conf.tier, group: 'level' });
+      allCatalogBadges.push({ id, title: conf.title, typeLabel: `创作等级 Lv.${conf.num}`, condition: `创作等级达到 Lv.${conf.num}`, icon: Shield, colorTier: conf.tier, group: 'level' });
       if (level >= conf.num) ownedIds.add(id);
     });
 
     const postChatterConfig = [
-      { num: 10, tier: 2, title: '浅层勘测' }, { num: 50, tier: 3, title: '战术总结' },
-      { num: 100, tier: 4, title: '机密档案' }, { num: 150, tier: 5, title: '源石解析' },
-      { num: 200, tier: 6, title: '协议核心' }, { num: 250, tier: 7, title: '灾兽洞察' },
-      { num: 300, tier: 8, title: '遗迹启示' }, { num: 400, tier: 9, title: '终末真理' },
-      { num: 450, tier: 9, title: '塔卫二全书' }, { num: 500, tier: 10, title: '普瑞赛斯之忆' }
+      { num: 10, tier: 2, title: '初稿成册' }, { num: 50, tier: 3, title: '主题成形' },
+      { num: 100, tier: 4, title: '百篇档案' }, { num: 150, tier: 5, title: '灵感解析' },
+      { num: 200, tier: 6, title: '知识核心' }, { num: 250, tier: 7, title: '洞察笔记' },
+      { num: 300, tier: 8, title: '长期沉淀' }, { num: 400, tier: 9, title: '体系成书' },
+      { num: 450, tier: 9, title: '创作全书' }, { num: 500, tier: 10, title: '时间档案馆' }
     ];
     postChatterConfig.forEach(conf => {
       const idPost = `post-${conf.num}`;
-      allCatalogBadges.push({ id: idPost, title: conf.title, typeLabel: '情报卷宗', condition: `累计解密 ${conf.num} 份卷宗`, icon: Cpu, colorTier: conf.tier, group: 'post' });
+      allCatalogBadges.push({ id: idPost, title: conf.title, typeLabel: '文章档案', condition: `累计发布 ${conf.num} 篇文章`, icon: Cpu, colorTier: conf.tier, group: 'post' });
       if (posts.length >= conf.num) ownedIds.add(idPost);
 
       const idChatter = `chatter-${conf.num}`;
-      allCatalogBadges.push({ id: idChatter, title: conf.title, typeLabel: '终端通讯', condition: `累计截获 ${conf.num} 条频段`, icon: Activity, colorTier: conf.tier, group: 'chatter' });
+      allCatalogBadges.push({ id: idChatter, title: conf.title, typeLabel: '杂谈记录', condition: `累计发布 ${conf.num} 条杂谈`, icon: Activity, colorTier: conf.tier, group: 'chatter' });
       if (chatters.length >= conf.num) ownedIds.add(idChatter);
     });
 
     const momentConfig = [
       { num: 10, tier: 2, title: '初设信标' }, { num: 50, tier: 3, title: '节点点亮' },
-      { num: 100, tier: 4, title: '百区网格' }, { num: 200, tier: 5, title: '探地雷达' },
-      { num: 300, tier: 6, title: '广域侦察' }, { num: 400, tier: 7, title: '全息地貌' },
-      { num: 500, tier: 8, title: '天灾预警' }, { num: 600, tier: 9, title: '裂境监视' },
+      { num: 100, tier: 4, title: '百日碎片' }, { num: 200, tier: 5, title: '灵感雷达' },
+      { num: 300, tier: 6, title: '广域记录' }, { num: 400, tier: 7, title: '生活切片' },
+      { num: 500, tier: 8, title: '节奏提醒' }, { num: 600, tier: 9, title: '连续观察' },
       { num: 700, tier: 9, title: '苍穹之眼' }, { num: 800, tier: 10, title: '绝对坐标' }
     ];
     momentConfig.forEach(conf => {
       const id = `moment-${conf.num}`;
-      allCatalogBadges.push({ id, title: conf.title, typeLabel: '观测信标', condition: `累计部署 ${conf.num} 处信标`, icon: Crosshair, colorTier: conf.tier, group: 'moment' });
+      allCatalogBadges.push({ id, title: conf.title, typeLabel: '动态记录', condition: `累计发布 ${conf.num} 条动态`, icon: Crosshair, colorTier: conf.tier, group: 'moment' });
       if (moments.length >= conf.num) ownedIds.add(id);
     });
 
     const photoConfig = [
       { num: 10, tier: 3, title: '镜头校准' },
-      { num: 50, tier: 6, title: '战地纪实' },
-      { num: 100, tier: 10, title: '泰拉全景' }
+      { num: 50, tier: 6, title: '旅途纪实' },
+      { num: 100, tier: 10, title: '生活全景' }
     ];
     photoConfig.forEach(conf => {
       const id = `photo-${conf.num}`;
-      allCatalogBadges.push({ id, title: conf.title, typeLabel: '视觉勘测', condition: `完成 ${conf.num} 处地形勘测`, icon: Camera, colorTier: conf.tier, group: 'photo' });
+      allCatalogBadges.push({ id, title: conf.title, typeLabel: '影像收藏', condition: `累计收藏 ${conf.num} 张照片`, icon: Camera, colorTier: conf.tier, group: 'photo' });
       if (totalPhotos >= conf.num) ownedIds.add(id);
     });
 
     const friendConfig = [
-      { num: 10, tier: 3, title: '临时干员' },
-      { num: 20, tier: 6, title: '战术分队' },
+      { num: 10, tier: 3, title: '友邻初识' },
+      { num: 20, tier: 6, title: '创作伙伴' },
       { num: 50, tier: 10, title: '跨界同盟' }
     ];
     friendConfig.forEach(conf => {
       const id = `friend-${conf.num}`;
-      allCatalogBadges.push({ id, title: conf.title, typeLabel: '协同协议', condition: `缔结 ${conf.num} 份干员协议`, icon: Users, colorTier: conf.tier, group: 'friend' });
+      allCatalogBadges.push({ id, title: conf.title, typeLabel: '友链关系', condition: `收录 ${conf.num} 位友邻`, icon: Users, colorTier: conf.tier, group: 'friend' });
       if (totalFriends >= conf.num) ownedIds.add(id);
     });
 
@@ -497,6 +497,10 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
     const fetchGitalkComments = async () => {
       try {
         const { owner, repo } = siteConfig.gitalkConfig;
+        if (!owner || !repo) {
+          setRealWishes([]);
+          return;
+        }
         const targetLabel = `workshop-${currentMonthStr}`;
         const issueRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues?labels=${targetLabel}`);
         const issues = await issueRes.json();
@@ -545,7 +549,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
     setActiveCategory(activeCategory === cat ? null : cat);
   };
 
-  if (!mounted) return <div className="min-h-[80vh] flex items-center justify-center text-slate-500 font-mono tracking-widest bg-transparent">CONNECTING TO PRTS...</div>;
+  if (!mounted) return <div className="min-h-[80vh] flex items-center justify-center text-slate-500 font-mono tracking-widest bg-transparent">CONNECTING TO ARCHIVE...</div>;
 
   return (
     <motion.div
@@ -562,7 +566,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
       `}} />
 
       {/* ========================================== */}
-      {/* 🌟 罗德岛人事中心：干员档案板 (Operator Profile) */}
+      {/* 🌟 创作中心：个人档案板 (Creator Profile) */}
       {/* ========================================== */}
       {rpgStats && (
         <div className="w-full max-w-6xl mb-8 px-4 z-30 flex flex-col gap-4 relative mt-2">
@@ -579,15 +583,15 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
               </div>
               <div className="flex flex-col ml-2">
                 <span className="text-white font-black text-xl tracking-widest flex items-center gap-2 drop-shadow-md">
-                  OPERATOR PROFILE
+                  CREATOR PROFILE
                 </span>
-                <span className="text-slate-400 text-[10px] font-mono tracking-[0.3em] mt-0.5 uppercase bg-black/50 w-max px-2 py-0.5 border border-[#333]">PRTS LINK ESTABLISHED</span>
+                <span className="text-slate-400 text-[10px] font-mono tracking-[0.3em] mt-0.5 uppercase bg-black/50 w-max px-2 py-0.5 border border-[#333]">ARCHIVE LINK ESTABLISHED</span>
               </div>
             </div>
 
             <div className="flex-1 w-full md:max-w-lg flex flex-col z-10">
               <div className="flex justify-between items-end mb-2 px-1">
-                <span className="text-[#eab308] text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-1.5"><Activity size={12}/> CLEARANCE EXP</span>
+                <span className="text-[#eab308] text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-1.5"><Activity size={12}/> CREATION EXP</span>
                 <span className="text-white text-xs font-mono font-bold tracking-wider drop-shadow-md">
                   {rpgStats.remainingExp} <span className="text-slate-500 font-normal">/ {rpgStats.expNeededForNextLevel}</span>
                 </span>
@@ -609,7 +613,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
                 <span className="text-[#eab308] font-mono text-sm font-black">+{rpgStats.todayExp} EXP</span>
               </div>
               <div className="flex flex-col items-center flex-1 md:flex-none">
-                <span className="text-slate-400 text-[9px] font-bold tracking-[0.2em] mb-1.5">PRTS SYNC</span>
+                <span className="text-slate-400 text-[9px] font-bold tracking-[0.2em] mb-1.5">ARCHIVE SYNC</span>
                 {rpgStats.isCheckedInToday ? (
                   <span className="text-[#10b981] text-[10px] font-black tracking-widest border border-[#10b981] px-2 py-0.5 bg-[#10b981]/10">ONLINE</span>
                 ) : (
@@ -619,11 +623,11 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
               <div className="absolute top-full right-1/2 translate-x-1/2 md:-translate-x-0 md:right-0 mt-3 w-52 bg-[#1e1e1e]/95 backdrop-blur-md border border-[#444] shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-300 z-50 p-3 pointer-events-none">
                 <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 md:-translate-x-0 md:left-auto md:right-10 w-3 h-3 bg-[#1e1e1e] border-t border-l border-[#444] rotate-45" />
-                <h4 className="text-[#eab308] text-[10px] font-black text-center mb-2 tracking-[0.2em] border-b border-[#444] pb-1 uppercase">Transmission Log</h4>
+                <h4 className="text-[#eab308] text-[10px] font-black text-center mb-2 tracking-[0.2em] border-b border-[#444] pb-1 uppercase">Activity Log</h4>
                 <div className="space-y-1.5 text-xs font-mono">
-                  {rpgStats.todayPosts > 0 && <div className="flex justify-between text-slate-200"><span>情报卷宗 <span className="text-[10px] text-slate-500">x{rpgStats.todayPosts}</span></span><span className="text-[#eab308]">+{rpgStats.todayPosts * 50}</span></div>}
-                  {rpgStats.todayChatters > 0 && <div className="flex justify-between text-slate-200"><span>终端通讯 <span className="text-[10px] text-slate-500">x{rpgStats.todayChatters}</span></span><span className="text-[#eab308]">+{rpgStats.todayChatters * 20}</span></div>}
-                  {rpgStats.todayMoments > 0 && <div className="flex justify-between text-slate-200"><span>观测信标 <span className="text-[10px] text-slate-500">x{rpgStats.todayMoments}</span></span><span className="text-[#eab308]">+{rpgStats.todayMoments * 10}</span></div>}
+                  {rpgStats.todayPosts > 0 && <div className="flex justify-between text-slate-200"><span>文章档案 <span className="text-[10px] text-slate-500">x{rpgStats.todayPosts}</span></span><span className="text-[#eab308]">+{rpgStats.todayPosts * 50}</span></div>}
+                  {rpgStats.todayChatters > 0 && <div className="flex justify-between text-slate-200"><span>杂谈记录 <span className="text-[10px] text-slate-500">x{rpgStats.todayChatters}</span></span><span className="text-[#eab308]">+{rpgStats.todayChatters * 20}</span></div>}
+                  {rpgStats.todayMoments > 0 && <div className="flex justify-between text-slate-200"><span>动态记录 <span className="text-[10px] text-slate-500">x{rpgStats.todayMoments}</span></span><span className="text-[#eab308]">+{rpgStats.todayMoments * 10}</span></div>}
                   {rpgStats.isCheckedInToday && <div className="flex justify-between text-slate-200"><span>系统初次同步</span><span className="text-[#eab308]">+100</span></div>}
                   {rpgStats.todayExp === 0 && <div className="text-center text-slate-600 italic text-[10px] py-1">NO DATA UPLOADED TODAY</div>}
                 </div>
@@ -670,7 +674,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
             >
               <div className="flex justify-between items-center px-6 py-4 border-b border-[#eab308]/50 bg-[#111] relative">
                 <div className="absolute inset-0 bg-[repeating-linear-gradient(-45deg,transparent,transparent_10px,rgba(255,255,255,0.02)_10px,rgba(255,255,255,0.02)_20px)] pointer-events-none" />
-                <h2 className="text-[#eab308] font-black tracking-widest flex items-center gap-2 text-lg uppercase"><Grid size={20} /> PRTS Master Database</h2>
+                <h2 className="text-[#eab308] font-black tracking-widest flex items-center gap-2 text-lg uppercase"><Grid size={20} /> Archive Master Database</h2>
                 <button onClick={() => setShowCatalog(false)} className="text-slate-500 hover:text-white transition-colors z-10"><X size={24} /></button>
               </div>
 
@@ -678,7 +682,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-12 h-px bg-[#eab308]" />
-                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Shield size={14} className="text-[#eab308]"/> 权限认证 (AUTH LEVEL)</span>
+                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Shield size={14} className="text-[#eab308]"/> 创作等级 (CREATOR LEVEL)</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-[#eab308]/50 to-transparent" />
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-10 justify-center">
@@ -689,7 +693,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
                 <div className="flex items-center gap-4 mt-16 mb-8">
                   <div className="w-12 h-px bg-[#0ea5e9]" />
-                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Cpu size={14} className="text-[#0ea5e9]"/> 情报卷宗 (INTEL FILES)</span>
+                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Cpu size={14} className="text-[#0ea5e9]"/> 文章档案 (POST ARCHIVE)</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-[#0ea5e9]/50 to-transparent" />
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-10 justify-center">
@@ -700,7 +704,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
                 <div className="flex items-center gap-4 mt-16 mb-8">
                   <div className="w-12 h-px bg-[#f59e0b]" />
-                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Activity size={14} className="text-[#f59e0b]"/> 终端通讯 (TERMINAL LOGS)</span>
+                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Activity size={14} className="text-[#f59e0b]"/> 杂谈记录 (CHATTER LOGS)</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-[#f59e0b]/50 to-transparent" />
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-10 justify-center">
@@ -711,7 +715,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
                 <div className="flex items-center gap-4 mt-16 mb-8">
                   <div className="w-12 h-px bg-[#10b981]" />
-                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Crosshair size={14} className="text-[#10b981]"/> 观测信标 (OBSERVATION BEACONS)</span>
+                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Crosshair size={14} className="text-[#10b981]"/> 动态记录 (MOMENT NOTES)</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-[#10b981]/50 to-transparent" />
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-10 justify-center">
@@ -722,7 +726,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
                 <div className="flex items-center gap-4 mt-16 mb-8">
                   <div className="w-12 h-px bg-white/50" />
-                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Camera size={14} /> 视觉勘测 (VISUAL RECON)</span>
+                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Camera size={14} /> 影像收藏 (PHOTO ARCHIVE)</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-white/50 to-transparent" />
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-10 justify-center">
@@ -733,7 +737,7 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
 
                 <div className="flex items-center gap-4 mt-16 mb-8">
                   <div className="w-12 h-px bg-indigo-400" />
-                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Users size={14} className="text-indigo-400"/> 协同协议 (COMM PROTOCOLS)</span>
+                  <span className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-2"><Users size={14} className="text-indigo-400"/> 友链关系 (FRIEND LINKS)</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-indigo-400/50 to-transparent" />
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-10 justify-center">
@@ -780,21 +784,21 @@ export default function DijiangModel({ posts = [], chatters = [], moments = [] }
             </AnimatePresence>
           </div>
 
-          <div className="text-[10px] text-slate-500 font-black tracking-[0.2em] uppercase mb-1 mt-2">SYSTEM OVERRIDE</div>
+          <div className="text-[10px] text-slate-500 font-black tracking-[0.2em] uppercase mb-1 mt-2">CONTENT FILTER</div>
 
           <button onClick={() => handleCategoryClick('post', countPost)} className={`flex items-center gap-4 w-60 p-2 border transition-all duration-300 backdrop-blur-md shadow-sm ${activeCategory === 'post' ? 'bg-[#0ea5e9] border-[#0ea5e9] text-white' : 'bg-[#1e1e1e]/80 border-[#333] hover:bg-[#2a2a2a] text-slate-300'}`}>
             <div className={`p-2 ${activeCategory === 'post' ? 'bg-white/20' : 'bg-[#111] border border-[#333] text-[#0ea5e9]'}`}><FileText size={16} /></div>
-            <div className="text-left flex-1"><div className="text-sm font-bold tracking-wider">PRTS_DB</div><div className={`text-[9px] font-mono ${activeCategory === 'post' ? 'text-white/80' : 'text-slate-500'}`}>情报卷宗</div></div>
+            <div className="text-left flex-1"><div className="text-sm font-bold tracking-wider">ARCHIVE</div><div className={`text-[9px] font-mono ${activeCategory === 'post' ? 'text-white/80' : 'text-slate-500'}`}>文章档案</div></div>
           </button>
 
           <button onClick={() => handleCategoryClick('chatter', countChatter)} className={`flex items-center gap-4 w-60 p-2 border transition-all duration-300 backdrop-blur-md shadow-sm ${activeCategory === 'chatter' ? 'bg-[#eab308] border-[#eab308] text-[#111]' : 'bg-[#1e1e1e]/80 border-[#333] hover:bg-[#2a2a2a] text-slate-300'}`}>
             <div className={`p-2 ${activeCategory === 'chatter' ? 'bg-black/20' : 'bg-[#111] border border-[#333] text-[#eab308]'}`}><MessageCircle size={16} /></div>
-            <div className="text-left flex-1"><div className="text-sm font-bold tracking-wider">LOGS</div><div className={`text-[9px] font-mono ${activeCategory === 'chatter' ? 'text-black/60' : 'text-slate-500'}`}>终端通讯</div></div>
+            <div className="text-left flex-1"><div className="text-sm font-bold tracking-wider">LOGS</div><div className={`text-[9px] font-mono ${activeCategory === 'chatter' ? 'text-black/60' : 'text-slate-500'}`}>杂谈记录</div></div>
           </button>
 
           <button onClick={() => handleCategoryClick('moment', countMoment)} className={`flex items-center gap-4 w-60 p-2 border transition-all duration-300 backdrop-blur-md shadow-sm ${activeCategory === 'moment' ? 'bg-[#10b981] border-[#10b981] text-[#111]' : 'bg-[#1e1e1e]/80 border-[#333] hover:bg-[#2a2a2a] text-slate-300'}`}>
             <div className={`p-2 ${activeCategory === 'moment' ? 'bg-black/20' : 'bg-[#111] border border-[#333] text-[#10b981]'}`}><Lightbulb size={16} /></div>
-            <div className="text-left flex-1"><div className="text-sm font-bold tracking-wider">BEACON</div><div className={`text-[9px] font-mono ${activeCategory === 'moment' ? 'text-black/60' : 'text-slate-500'}`}>观测信标</div></div>
+            <div className="text-left flex-1"><div className="text-sm font-bold tracking-wider">MOMENTS</div><div className={`text-[9px] font-mono ${activeCategory === 'moment' ? 'text-black/60' : 'text-slate-500'}`}>动态记录</div></div>
           </button>
 
           <button onClick={() => handleCategoryClick('message', countMessage)} className={`flex items-center gap-4 w-60 p-2 border transition-all duration-300 backdrop-blur-md shadow-sm ${activeCategory === 'message' ? 'bg-[#f1f5f9] border-[#f1f5f9] text-[#111]' : 'bg-[#1e1e1e]/80 border-[#333] hover:bg-[#2a2a2a] text-slate-300'}`}>

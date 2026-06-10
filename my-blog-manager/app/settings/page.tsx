@@ -183,7 +183,7 @@ function SettingsContent() {
     showToast(`🎉 【${label}】已加入右上角操作队列！`, "success");
   };
 
-  // 👇 🌟 在菜单里增加 AI 猫咪入口
+  // 👇 🌟 在菜单里增加 AI 助手入口
   const menuItems = [
     { id: 'profile', name: '个人名片设置', icon: '👤' },
     { id: 'display', name: '视窗画面设置', icon: '🪟' },
@@ -193,7 +193,7 @@ function SettingsContent() {
     { id: 'footer', name: '首页底部设置', icon: '🧩' },
     { id: 'danmaku', name: '全站弹幕设置', icon: '⚡' },
     { id: 'comment', name: '评论系统配置', icon: '💬' },
-    { id: 'aicat', name: 'AI 煤球配置', icon: '🐾' }, // 👈 新增的小猫设置
+    { id: 'aicat', name: 'AI 助手配置', icon: '🐾' },
     { id: 'repo', name: '项目仓库设置', icon: '🚀' },
   ];
 
@@ -233,7 +233,7 @@ function SettingsContent() {
               {activeTab === 'footer' && <FooterSection key="footer" formData={formData} handleUpdate={handleUpdate} pushToQueue={pushToQueue} />}
               {activeTab === 'danmaku' && <DanmakuSection key="danmaku" formData={formData} handleUpdate={handleUpdate} pushToQueue={pushToQueue} />}
               {activeTab === 'comment' && <CommentSection key="comment" formData={formData} handleUpdate={handleUpdate} pushToQueue={pushToQueue} />}
-              {/* 👇 🌟 挂载 AI 猫咪面板 */}
+              {/* 👇 🌟 挂载 AI 助手面板 */}
               {activeTab === 'aicat' && <AICatSection key="aicat" formData={formData} handleUpdate={handleUpdate} pushToQueue={pushToQueue} />}
 
               {activeTab === 'repo' && <RepoSection key="repo" />}

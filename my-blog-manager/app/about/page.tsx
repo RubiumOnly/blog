@@ -23,31 +23,55 @@ import { siteConfig } from '../../siteConfig';
 // 🌟 引入刚刚写好的前端交互引擎
 import AboutClient from '../../components/AboutClient';
 
-// 🌟 读取指定目录下的 markdown 文件，并提取属性
-function getDirActivities(dirName: string, typeLabel: '文章' | '杂谈' | '说说', linkPrefix: string) {
-  const dirPath = path.join(process.cwd(), dirName);
+function buildActivity(file: string, dirName: string, typeLabel: '文章' | '杂谈' | '说说', linkPrefix: string, content: string) {
+  const { data } = matter(content);
+  return {
+    id: `${dirName}-${file}`,
+    type: typeLabel,
+    title: data.title || file.replace('.md', ''),
+    // 保留完整 ISO 时间供前端处理
+    date: data.date ? new Date(data.date).toISOString() : '1970-01-01T00:00:00Z',
+    url: `/${linkPrefix}/${file.replace('.md', '')}`
+  };
+}
+
+function getPostActivities() {
+  const dirPath = path.join(process.cwd(), 'posts');
   if (!fs.existsSync(dirPath)) return [];
 
   const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.md'));
-
   return files.map(file => {
-    const content = fs.readFileSync(path.join(dirPath, file), 'utf8');
-    const { data } = matter(content);
-    return {
-      id: `${dirName}-${file}`,
-      type: typeLabel,
-      title: data.title || file.replace('.md', ''),
-      // 保留完整 ISO 时间供前端处理
-      date: data.date ? new Date(data.date).toISOString() : '1970-01-01T00:00:00Z',
-      url: `/${linkPrefix}/${file.replace('.md', '')}`
-    };
+    const content = fs.readFileSync(path.join(process.cwd(), 'posts', file), 'utf8');
+    return buildActivity(file, 'posts', '文章', 'posts', content);
+  });
+}
+
+function getChatterActivities() {
+  const dirPath = path.join(process.cwd(), 'chatters');
+  if (!fs.existsSync(dirPath)) return [];
+
+  const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.md'));
+  return files.map(file => {
+    const content = fs.readFileSync(path.join(process.cwd(), 'chatters', file), 'utf8');
+    return buildActivity(file, 'chatters', '杂谈', 'chatter', content);
+  });
+}
+
+function getMomentActivities() {
+  const dirPath = path.join(process.cwd(), 'moments');
+  if (!fs.existsSync(dirPath)) return [];
+
+  const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.md'));
+  return files.map(file => {
+    const content = fs.readFileSync(path.join(process.cwd(), 'moments', file), 'utf8');
+    return buildActivity(file, 'moments', '说说', 'moments', content);
   });
 }
 
 export default async function AdminAboutPage() {
   const fullPath = path.join(process.cwd(), 'app', 'about', 'about.md');
   let contentHtml = "博主很懒，还没有写自我介绍哦...";
-  let coverImage = "https://bu.dusays.com/2026/03/24/69c23dc278c78.jpg";
+  let coverImage = "/siamese-cat.png";
 
   try {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -99,9 +123,9 @@ export default async function AdminAboutPage() {
   }
 
   // 🌟 3. 获取所有的活动动态
-  const posts = getDirActivities('posts', '文章', 'posts');
-  const chatters = getDirActivities('chatters', '杂谈', 'chatter');
-  const moments = getDirActivities('moments', '说说', 'moments');
+  const posts = getPostActivities();
+  const chatters = getChatterActivities();
+  const moments = getMomentActivities();
 
   // 将所有动态合并，并按时间倒序排列 (最新的在最上面)
   const allActivities = [...posts, ...chatters, ...moments].sort((a, b) => {
@@ -241,7 +265,7 @@ export default async function AdminAboutPage() {
           <Suspense fallback={
             <div className="h-96 flex flex-col gap-4 items-center justify-center text-slate-500 font-bold bg-white/40 dark:bg-slate-800/40 rounded-[40px] animate-pulse">
               <span className="text-3xl">📡</span>
-              正在连线源石数据库...
+              正在连线个人档案数据库...
             </div>
           }>
             <AboutClient

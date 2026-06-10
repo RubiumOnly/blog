@@ -11,19 +11,26 @@ import { siteConfig } from '../siteConfig'; // 如果路径报错，请检查层
 export default function Comments() {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const gitalkConfig = siteConfig.gitalkConfig;
+  const isGitalkReady = Boolean(
+    gitalkConfig?.clientID &&
+    gitalkConfig?.clientSecret &&
+    gitalkConfig?.repo &&
+    gitalkConfig?.owner
+  );
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !isGitalkReady) return;
 
     // 清空之前的评论区（防止 Next.js 路由切换时重复渲染）
     containerRef.current.innerHTML = '';
 
     const gitalk = new Gitalk({
-      clientID: siteConfig.gitalkConfig.clientID,
-      clientSecret: siteConfig.gitalkConfig.clientSecret,
-      repo: siteConfig.gitalkConfig.repo,
-      owner: siteConfig.gitalkConfig.owner,
-      admin: siteConfig.gitalkConfig.admin,
+      clientID: gitalkConfig.clientID,
+      clientSecret: gitalkConfig.clientSecret,
+      repo: gitalkConfig.repo,
+      owner: gitalkConfig.owner,
+      admin: gitalkConfig.admin,
 
       // 👇 指向我们自己的同源 API，彻底告别跨域和第三方拦截！
       proxy: '/api/github',
@@ -42,7 +49,9 @@ export default function Comments() {
       window.history.replaceState({}, document.title, url.toString());
     }
 
-  }, [pathname]);
+  }, [pathname, isGitalkReady, gitalkConfig]);
+
+  if (!isGitalkReady) return null;
 
   return (
     <div className="w-full mt-16 relative">

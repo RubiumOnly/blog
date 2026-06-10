@@ -140,7 +140,7 @@ export default function ChatterBoard({ chatters: initialChatters }: { chatters: 
           initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter"
         >
-          {siteConfig.chatterTitle || "源石研究笔记"}
+          {siteConfig.chatterTitle || "云端杂谈"}
         </motion.h1>
         <p className="text-slate-500 dark:text-slate-400 font-medium italic opacity-80 flex items-center justify-center gap-2">
           <Sparkles size={14} className="text-indigo-500" />

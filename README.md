@@ -212,7 +212,7 @@ Vercel 默认会为你分配一个免费的二级域名：
 
 ![进入设置](picture/Pasted%20image%2020260427123838.png)
 
-在 Domains 选项卡中，输入你购买的域名（例如我的是 `xinghuisama.top`），点击 **Add** 保存：
+在 Domains 选项卡中，输入你购买的域名（例如 `example.com`），点击 **Add** 保存：
 
 ![输入域名](picture/afb9fe5f-bf1e-4a8a-ae6b-379938f0924d.png)
 
@@ -226,7 +226,7 @@ Vercel 默认会为你分配一个免费的二级域名：
 
 ![Refresh](picture/Pasted%20image%2020260427124625.png)
 
-当状态显示为正常后，你就可以通过自己的专属域名访问博客了！（例如：`www.xinghuisama.top`）。
+当状态显示为正常后，你就可以通过自己的专属域名访问博客了！（例如：`www.example.com`）。
 
 ---
 
@@ -337,7 +337,7 @@ Vercel 默认会为你分配一个免费的二级域名：
 | 字段名称                       | 填写建议                                                                           |
 | ------------------------------ | ---------------------------------------------------------------------------------- |
 | **Application name**           | 自定义名称，例如：`My-Blog-Comments`                                               |
-| **Homepage URL**               | 你的博客**首页完整地址** (例如 `https://www.xinghuisama.top`)                      |
+| **Homepage URL**               | 你的博客**首页完整地址** (例如 `https://www.example.com`)                          |
 | **Application description**    | 可选填                                                                             |
 | **Authorization callback URL** | **核心参数**：必须填写你的博客域名。如果经常本地调试，可填 `http://localhost:3000` |
 
