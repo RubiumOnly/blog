@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const token = process.env.QWEATHER_KEY;
-  let clientIp = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || req.headers.get('x-real-ip') || '';
+  let forwarded = req.headers.get('x-forwarded-for');
+  let clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers.get('x-real-ip') || '');
   let city = req.headers.get('x-vercel-ip-city') || '';
   
   if (!city) city = "北京市";
