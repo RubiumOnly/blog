@@ -16,10 +16,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ code: "500", message: "Token missing" }, { status: 500 });
   }
 
-  const apiHosts = [
+  // 和风天气新版 API 需要专属的 Host 域名
+  let apiHosts = [
     'https://devapi.qweather.com/v7/weather/now',
     'https://api.qweather.com/v7/weather/now'
   ];
+
+  if (process.env.QWEATHER_HOST) {
+    let customHost = process.env.QWEATHER_HOST.trim();
+    if (!customHost.startsWith('http')) customHost = `https://${customHost}`;
+    if (!customHost.endsWith('/v7/weather/now')) customHost = `${customHost}/v7/weather/now`;
+    apiHosts = [customHost, ...apiHosts];
+  }
 
   for (const host of apiHosts) {
     try {
