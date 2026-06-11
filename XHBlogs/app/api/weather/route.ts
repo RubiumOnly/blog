@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const token = process.env.QWEATHER_KEY;
-  let forwarded = req.headers.get('x-forwarded-for');
-  let clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers.get('x-real-ip') || '');
   let city = req.headers.get('x-vercel-ip-city') || '';
+  let lon = req.headers.get('x-vercel-ip-longitude');
+  let lat = req.headers.get('x-vercel-ip-latitude');
   
   if (!city) city = "北京市";
-  const locationId = clientIp || "101010100";
+  
+  // QWeather v7 /weather/now API strictly requires Coordinates (lon,lat) or LocationID, NOT IP string.
+  const locationId = (lon && lat) ? `${lon},${lat}` : "101010100";
 
   if (!token) {
     console.error("❌ 环境变量 QWEATHER_KEY (Token) 未找到");
