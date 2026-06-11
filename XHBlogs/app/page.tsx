@@ -18,7 +18,7 @@ import { ToastProvider } from '../components/ToastProvider';
 
 import LatestPostsCarousel from '../components/LatestPostsCarousel';
 import LatestChatterCarousel from '../components/LatestChatterCarousel';
-import DanmakuBackground from '../components/DanmakuBackground';
+import WeatherEffect from '../components/WeatherEffect';
 
 function formatUpdateTime(dateString: string) {
   if (!dateString || dateString === '1970-01-01') return '刚刚更新';
@@ -92,6 +92,7 @@ export default function Home() {
   return (
     <ToastProvider>
       <div className="min-h-screen relative pb-10">
+        <WeatherEffect />
         <Navbar />
         <PageTransition>
           {/* 🌟 调整整体容器的内边距，适应手机端更小的屏幕 */}
