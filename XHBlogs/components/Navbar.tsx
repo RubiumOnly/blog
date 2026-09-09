@@ -74,15 +74,10 @@ export default function Navbar() {
     { name: '归档', href: '/timeline' },
     { name: '照片墙', href: '/photowall' },
     { name: '音乐', href: '/music' },
-    { name: '灵境', href: '/tree' },
     { name: '说说', href: '/moments' },
-    { name: '杂谈', href: '/chatter' },
     { name: '友链', href: '/friends' },
     { name: '关于', href: '/about' },
   ];
-
-  // 🌟 核心：过滤掉“灵境”，专供手机端使用，保证圆盘自动重新均匀排布
-  const mobileNavLinks = navLinks.filter(link => link.href !== '/tree');
 
   return (
     <>
@@ -94,14 +89,20 @@ export default function Navbar() {
             <span className="text-indigo-500 mx-1">{siteConfig.navSuffix || 'の'}</span>
             {siteConfig.navAfter || '宝藏之地'}
           </Link>
-          <nav className="flex gap-8 text-sm font-bold">
-            {/* PC端依然使用全量的 navLinks */}
+          <nav className="flex items-center gap-1 lg:gap-2 text-sm font-bold bg-white/40 dark:bg-slate-800/40 p-1 rounded-full border border-white/40 dark:border-white/10 backdrop-blur-md shadow-inner">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || pathname === `${link.href}/`;
               return (
-                <Link key={link.href} href={link.href} className={`relative py-1 transition-colors ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-600'}`}>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`px-3.5 py-1.5 rounded-full transition-all duration-300 relative ${
+                    isActive
+                      ? 'text-white bg-indigo-500 shadow-sm shadow-indigo-500/30'
+                      : 'text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-white/50 dark:hover:bg-slate-700/50'
+                  }`}
+                >
                   {link.name}
-                  {isActive && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-500 rounded-full animate-pulse"></span>}
                 </Link>
               );
             })}
@@ -162,11 +163,10 @@ export default function Navbar() {
                     </button>
                   </div>
 
-                  {/* 🌟 手机端轮盘渲染：使用过滤后的 mobileNavLinks */}
-                  {mobileNavLinks.map((link, index) => {
+                  {/* 🌟 手机端轮盘渲染：8项45度均匀对称排布 */}
+                  {navLinks.map((link, index) => {
                     const isActive = pathname === link.href || pathname === `${link.href}/`;
-                    // 🌟 角度计算也会基于过滤后的长度，保证图标自动均匀排布！
-                    const angle = index * (360 / mobileNavLinks.length);
+                    const angle = index * (360 / navLinks.length);
 
                     return (
                       <div

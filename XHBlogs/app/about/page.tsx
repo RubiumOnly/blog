@@ -20,7 +20,7 @@ import PageTransition from '../../components/PageTransition';
 import AboutClient from '../../components/AboutClient';
 import { Suspense } from 'react';
 
-function buildActivity(file: string, dirName: string, typeLabel: '文章' | '杂谈' | '说说', linkPrefix: string, content: string) {
+function buildActivity(file: string, dirName: string, typeLabel: '文章' | '说说', linkPrefix: string, content: string) {
   const { data } = matter(content);
   return {
     id: `${dirName}-${file}`,
@@ -39,17 +39,6 @@ function getPostActivities() {
   return files.map(file => {
     const content = fs.readFileSync(path.join(process.cwd(), 'posts', file), 'utf8');
     return buildActivity(file, 'posts', '文章', 'posts', content);
-  });
-}
-
-function getChatterActivities() {
-  const dirPath = path.join(process.cwd(), 'chatters');
-  if (!fs.existsSync(dirPath)) return [];
-
-  const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.md'));
-  return files.map(file => {
-    const content = fs.readFileSync(path.join(process.cwd(), 'chatters', file), 'utf8');
-    return buildActivity(file, 'chatters', '杂谈', 'chatter', content);
   });
 }
 
@@ -117,10 +106,9 @@ export default async function AboutPage() {
   }
 
   const posts = getPostActivities();
-  const chatters = getChatterActivities();
   const moments = getMomentActivities();
 
-  const allActivities = [...posts, ...chatters, ...moments].sort((a, b) => {
+  const allActivities = [...posts, ...moments].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 

@@ -15,28 +15,28 @@ export const siteConfig = {
   navAfter: "Blog",
 
   // 2. 头像设置 (支持网络链接，或将图片放入 public 文件夹后使用 "/me.jpg")
-  avatarUrl: "/siamese-cat.png",
+  avatarUrl: "https://cdn.jsdelivr.net/gh/RubiumOnly/blog-images@main/images/2026/06/10/b459f60a-045c57ebb6946fdf7e57a53d5768117dd8543862.gif",
 
   // 3. 网站背景设置 (二选一)
   // 如果想用纯图片背景，请在下面 bgImage 写路径，并将 useGradient 设为 false
   useGradient: true,
   themeColors: ["#0ea5e9", "#14b8a6", "#f59e0b", "#f43f5e"], // 呼吸流动的颜色组合
 // 修改这里：变成图片数组
-  bgImages: [],
+  bgImages: ["https://cdn.jsdelivr.net/gh/RubiumOnly/blog-images@main/images/2026/09/09/6d9ce159-113454227_p0.png"],
 
   // 4. 文章默认封面图 (当 Markdown 没写 cover 时显示)
   defaultPostCover: "/siamese-cat.png",
 
   // 5. 首页照片墙预览图
   photoWallImage: "/siamese-cat.png",
-  cloudMusicIds: [],
+  cloudMusicIds: ["3375694932", "1807537867"],
   social: {
     github: "https://github.com/RubiumOnly",
     gitee: "",
     google: "",
-    email: "",
-    qq: "",
-    wechat: "",
+    email: "2116284653@qq.com",
+    qq: "2116284653",
+    wechat: "long1840169600",
   },
   counts: {
     photos: 1, // 照片墙数量可以手动写死或动态计算
@@ -48,9 +48,9 @@ export const siteConfig = {
   // 👇 【新增】：全局背景弹幕配置
   danmakuList: ["正在记录灵感", "今天也要好好写代码", "保持好奇", "慢慢打磨"],
   gitalkConfig: {
-    clientID: "",
-    clientSecret: "",
-    repo: "",
+    clientID: "Ov23li0s0kTkUQHMYxDd",
+    clientSecret: "eedae63e0d681d26cedaebfa2bec9e0c841563fe",
+    repo: "blog-comments",
     owner: "RubiumOnly",
     admin: ["RubiumOnly"],
   },
